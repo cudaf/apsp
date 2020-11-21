@@ -81,6 +81,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gpu\support.h" />
+    <ClInclude Include="graph\Common.h" />
+    <ClInclude Include="graph\DiGraph.h" />
+    <ClInclude Include="graph\Graph.h" />
+    <ClInclude Include="graph\Staging.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

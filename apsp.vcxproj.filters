@@ -7,10 +7,25 @@
     <Filter Include="gpu">
       <UniqueIdentifier>{d9de0d06-bef9-4a4a-afbb-1a368ea66259}</UniqueIdentifier>
     </Filter>
+    <Filter Include="graph">
+      <UniqueIdentifier>{8aa1d5af-9184-4af7-9c60-e7f3957a8624}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gpu\support.h">
       <Filter>gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="graph\DiGraph.h">
+      <Filter>graph</Filter>
+    </ClInclude>
+    <ClInclude Include="graph\Graph.h">
+      <Filter>graph</Filter>
+    </ClInclude>
+    <ClInclude Include="graph\Staging.h">
+      <Filter>graph</Filter>
+    </ClInclude>
+    <ClInclude Include="graph\Common.h">
+      <Filter>graph</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

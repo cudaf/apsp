@@ -4,6 +4,9 @@
 using std::vector;
 
 
+// Table graph structures are used when running graph algorithms.
+// update() operation generates / updates the table.
+
 namespace cppf {
 
 // Table data for vertices in undirected graph.

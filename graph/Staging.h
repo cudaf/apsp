@@ -10,7 +10,6 @@ using std::vector;
 namespace cppf {
 
 // Temporary data for an addVertex() operation.
-
 template <typename V>
 struct GraphAddVertex {
   int key;
@@ -21,7 +20,6 @@ struct GraphAddVertex {
 
 
 // Temporary data for an addEdge() operation.
-
 template <typename E>
 struct GraphAddEdge {
   int from;
@@ -35,7 +33,6 @@ struct GraphAddEdge {
 
 
 // Temporary data for a removeVertex() operation.
-
 struct GraphRemoveVertex {
   int key;
 };
@@ -43,7 +40,6 @@ struct GraphRemoveVertex {
 
 
 // Temporary data for a removeEdge() operation.
-
 struct GraphRemoveEdge {
   int from;
   int to;
@@ -53,36 +49,30 @@ struct GraphRemoveEdge {
 
 
 
-// Temporary data for add() operations.
+// Indicates the operation type.
+enum GraphOperationType {
+  GRAPH_ADD_VERTEX,
+  GRAPH_ADD_EDGE,
+  GRAPH_REMOVE_VERTEX,
+  GRAPH_REMOVE_EDGE
+};
 
+
+// Temporary data for add() / remove() operation.
 template <typename V, typename E>
-struct GraphAdd {
-  vector<GraphAddVertex<V>> vertex;
-  vector<GraphAddEdge<E>>   edge;
+struct GraphOperation {
+  GraphOperationType  type;
+  union {
+    GraphAddVertex<V> addVertex;
+    GraphAddEdge<E>   addEdge;
+    GraphRemoveVertex removeVertex;
+    GraphRemoveEdge   removeEdge;
+  };
 };
-// vertex: for addVertex() operation
-// edge: for addEdge() operation
 
 
-// Temporary data for remove() operations.
-
-struct GraphRemove {
-  vector<GraphRemoveVertex> vertex;
-  vector<GraphRemoveEdge>   edge;
-};
-// vertex: for removeVertex() operation
-// edge: for removeEdge() operation
-
-
-
-// Temporary data for add()/remove() operations.
-
+// Temporary data for add() / remove() operations.
 template <typename V, typename E>
-struct GraphStaging {
-  GraphAdd<V, E>  add;
-  GraphRemove     remove;
-};
-// add: for add() operations
-// remove: for remove() operations
+using GraphStaging = vector<GraphOperation<V, E>>;
 
 }

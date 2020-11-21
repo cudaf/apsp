@@ -1,4 +1,8 @@
 #pragma once
+#include <vector>
+
+using std::vector;
+
 
 // Staging graph structures maintain temporary data before updating a graph.
 // add() & remove() operations are queued here until and update().
@@ -53,8 +57,8 @@ struct GraphRemoveEdge {
 
 template <typename V, typename E>
 struct GraphAdd {
-  GraphAddVertex<V> vertex;
-  GraphAddEdge<E>   edge;
+  vector<GraphAddVertex<V>> vertex;
+  vector<GraphAddEdge<E>>   edge;
 };
 // vertex: for addVertex() operation
 // edge: for addEdge() operation
@@ -63,8 +67,8 @@ struct GraphAdd {
 // Temporary data for remove() operations.
 
 struct GraphRemove {
-  GraphRemoveVertex vertex;
-  GraphRemoveEdge   edge;
+  vector<GraphRemoveVertex> vertex;
+  vector<GraphRemoveEdge>   edge;
 };
 // vertex: for removeVertex() operation
 // edge: for removeEdge() operation

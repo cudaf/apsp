@@ -2,43 +2,83 @@
 
 // Staging graph structures maintain temporary data before updating a graph.
 // add() & remove() operations are queued here until and update().
+
 namespace cppf {
 
 // Temporary data for an addVertex() operation.
+
 template <typename V>
-struct GraphVAdd {
-  int id;
-  V   data;
+struct GraphAddVertex {
+  int key;
+  V   value;
 };
-// id: unique id of vertex
-// data: associated data
+// key: unique id of vertex
+// value: vertex data
 
 
 // Temporary data for an addEdge() operation.
+
 template <typename E>
-struct GraphEAdd {
+struct GraphAddEdge {
   int from;
   int to;
-  E   data;
+  E   value;
 };
 // from: source vertex unique id
 // to: target vertex unique id
-// data: associated data
+// value: edge data
+
 
 
 // Temporary data for a removeVertex() operation.
-struct GraphVRemove {
-  int id;
+
+struct GraphRemoveVertex {
+  int key;
 };
-// id: unique id of vertex
+// key: unique id of vertex
 
 
 // Temporary data for a removeEdge() operation.
-struct GraphERemove {
+
+struct GraphRemoveEdge {
   int from;
   int to;
 };
 // from: source vertex unique id
 // to: target vertex unique id
+
+
+
+// Temporary data for add() operations.
+
+template <typename V, typename E>
+struct GraphAdd {
+  GraphAddVertex<V> vertex;
+  GraphAddEdge<E>   edge;
+};
+// vertex: for addVertex() operation
+// edge: for addEdge() operation
+
+
+// Temporary data for remove() operations.
+
+struct GraphRemove {
+  GraphRemoveVertex vertex;
+  GraphRemoveEdge   edge;
+};
+// vertex: for removeVertex() operation
+// edge: for removeEdge() operation
+
+
+
+// Temporary data for add()/remove() operations.
+
+template <typename V, typename E>
+struct GraphStaging {
+  GraphAdd<V, E>  add;
+  GraphRemove     remove;
+};
+// add: for add() operations
+// remove: for remove() operations
 
 }

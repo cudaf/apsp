@@ -1,36 +1,14 @@
 #pragma once
-#include <cstdint>
 #include <vector>
+#include "Table.h"
 
+namespace cppf {
 
 template <typename V, typename E>
 class DiGraph {
 
-  struct VAdd {
-    int id;
-    V   data;
-  };
-
-  struct EAdd {
-    int from;
-    int to;
-    E   data;
-  };
-
-  struct VEntry {
-    int32_t id;
-    int32_t ein;
-    int32_t eout;
-    V       data;
-  };
-
-  struct EEntry {
-    int32_t vboth;
-    E       data;
-  };
-
   vector<VEntry> vtable;
-  vector<EEntry> etable;
+  vector<DiGraphEEntry<E>> etable;
   vector<int32_t> vlookup;
 
   // staging area
@@ -84,3 +62,5 @@ public:
   // float estradaIndex();
   // float strength();
 };
+
+}

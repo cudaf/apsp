@@ -1,11 +1,14 @@
 #pragma once
+#include <vector>
+
+using std::vector;
 
 
 namespace cppf {
 
 // Table data for vertices in undirected graph.
 template <typename V>
-struct GraphVEntry {
+struct GraphVertexEntry {
   int key;
   int any;
   V   value;
@@ -17,7 +20,7 @@ struct GraphVEntry {
 
 // Table data for edges in undirected graph.
 template <typename E>
-struct GraphEEntry {
+struct GraphEdgeEntry {
   int any;
   E   value;
 };
@@ -28,7 +31,7 @@ struct GraphEEntry {
 
 // Table data for vertices in directed graph.
 template <typename V>
-struct DiGraphVEntry {
+struct DiGraphVertexEntry {
   int key;
   int in;
   int out;
@@ -42,6 +45,27 @@ struct DiGraphVEntry {
 
 // Table data for edges in directed graph.
 template <typename E>
-using DiGraphEEntry = GraphEEntry<E>;
+using DiGraphEdgeEntry = GraphEdgeEntry<E>;
+
+
+
+// Table for vertices & edges in undirected graph.
+template <typename V, typename E>
+struct GraphTable {
+  vector<GraphVertexEntry<V>> vertex;
+  vector<GraphEdgeEntry<E>>   edge;
+};
+// vertex: vertex entries
+// edge: edge entries
+
+
+// Table for vertices & edges in directed graph.
+template <typename V, typename E>
+struct DiGraphTable {
+  vector<DiGraphVertexEntry<V>> vertex;
+  vector<DiGraphEdgeEntry<E>>   edge;
+};
+// vertex: vertex entries
+// edge: edge entries
 
 }

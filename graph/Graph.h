@@ -18,8 +18,42 @@ class Graph {
   GraphStaging<V, E>  staging;
 
   public:
+  int order(); // number of vertices
+  int size();  // number of edges
+  vector<GraphVertex> vertices();
+  vector<GraphEdge> edges();
+  vector<GraphVertex> neighbours(int key);
   pair<int, V> vertex(int i);
+  V vertexValue(int id);
+
   bool isUpdated();
+
+
+
+
+
+  void addVertex(int key, V value) {
+    staging.push_back({GRAPH_ADD_VERTEX, {key, value}});
+  }
+
+  void addEdge(int from, int to, V value) {
+    staging.push_back({GRAPH_ADD_EDGE, {from, to, value}});
+  }
+
+  void removeVertex(int key) {
+    staging.push_back({GRAPH_REMOVE_VERTEX, {key}});
+  }
+
+  void removeEdge(int from, int to) {
+    staging.push_back({GRAPH_REMOVE_EDGE, {from, to}});
+  }
+
+  void update() {
+    for (auto&& op : staging) {
+      // some magic
+    }
+    staging.clear();
+  }
 };
 
 

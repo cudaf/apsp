@@ -27,9 +27,13 @@ class DiGraph {
   void addEdge(int from, int to, E value);
   void removeVertex(int key);
   void removeEdge(int from, int to);
+  void addVertices(vector<GraphVertex<V>> vs);
+  void addEdges(vector<GraphEdge<E>> es);
+  void removeVertices(vector<GraphVertexKey<V>> vs);
+  void removeEdges(vector<GraphEdgeKey<E>> es);
   void clear();
-  void update();
-  bool isUpdated();
+  // update()
+  // isUpdated()
 
   // properties
   int order();
@@ -56,16 +60,22 @@ class DiGraph {
   void setVertex(int key, V value);
   void setEdge(int from, int to, E value);
   int findVertex(int key);
-  int findEdge(int from, int to);
+  int findInEdge(int from, int to);
+  int findOutEdge(int from, int to);
+  int[2] findEdge(int from, int to);
   
   // using index (faster)
   GraphVertexEntry<V> v(int i);
-  GraphEdgeEntry<E> e(int i);
+  GraphEdgeEntry<E> inE(int i);
+  GraphEdgeEntry<E> outE(int i);
+  GraphEdgeEntry<E>[2] e(int i);
   V getV(int i);
   E getE(int i);
   void setV(int i, V value);
   void setE(int i, E value);
-  int findE(int i, int j);
+  int findInE(int i, int j);
+  int findOutE(int i, int j);
+  int[2] findE(int i, int j);
 };
 
 

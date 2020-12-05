@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <unordered_map>
+#include <algorithm>
 #include "Common.h"
 
 
@@ -10,6 +11,7 @@
 namespace cppf {
 using std::vector;
 using std::unordered_map;
+using std::binary_search;
 
 
 template <typename V, typename E>
@@ -45,6 +47,7 @@ class DiGraph {
   int inDegree(int key);
   int outDegree(int key);
   int degree(int key);
+
   vector<GraphVertex<V>> vertices();
   vector<GraphEdge<E>> inEdges();
   vector<GraphEdge<E>> outEdges();
@@ -54,30 +57,89 @@ class DiGraph {
   vector<GraphVertex<V>> neighbours(int key);
   vector<GraphEdge<E>> inEdges(int key);
   vector<GraphEdge<E>> outEdges(int key);
-  vector<GraphEdge<E>> edges(int key);
-  V getVertex(int key);
-  E getEdge(int from, int to);
-  void setVertex(int key, V value);
-  void setEdge(int from, int to, E value);
-  int findVertex(int key);
-  int findInEdge(int from, int to);
-  int findOutEdge(int from, int to);
-  int[2] findEdge(int from, int to);
+  
+  inline V getVertex(int key) {
+    return getV(findV(key));
+  }
+
+  inline E getInEdge(int from, int to) {
+    return getInE(findV(from), findV(to));
+  }
+
+  inline void setVertex(int key, V value) {
+    setV(findV(key), value);
+  }
+
+  inline void setInEdge(int from, int to, E value) {
+    setInE(findV(from), findV(to), value);
+  }
+
+  inline void setOutEdge(int from, int to, E value) {
+    setOutE(findV(from), findV(to), value);
+  }
+
+  inline int findVertex(int key) {
+    return findV(key);
+  }
+
+  inline int findInEdge(int from, int to) {
+    return findInE(findV(from), findV(to));
+  }
+
+  inline int findOutEdge(int from, int to) {
+    return findOutE(findV(from), findV(to));
+  }
+  
   
   // using index (faster)
-  GraphVertexEntry<V> v(int i);
-  GraphEdgeEntry<E> inE(int i);
-  GraphEdgeEntry<E> outE(int i);
-  GraphEdgeEntry<E>[2] e(int i);
-  V getV(int i);
-  E getE(int i);
-  void setV(int i, V value);
-  void setE(int i, E value);
-  int findInE(int i, int j);
-  int findOutE(int i, int j);
-  int[2] findE(int i, int j);
-};
+  inline GraphVertexEntry<V> v(int i) {
+    return _vertices[i];
+  }
 
+  inline GraphEdgeEntry<E> inE(int i) {
+    return _inEdges[i];
+  }
+
+  inline GraphEdgeEntry<E> outE(int i) {
+    return _outEdges[i];
+  }
+
+  inline V getV(int i) {
+    return v(i).value;
+  }
+
+  inline E getInE(int i) {
+    return inE(i).value;
+  }
+
+  inline E getOutE(int i) {
+    return outE(i).value;
+  }
+
+  inline void setV(int i, V value) {
+    _vertices[i].value = value;
+  }
+
+  inline void setInE(int i, E value) {
+    _inEdges[i].value = value;
+  }
+
+  inline void setOutE(int i, E value) {
+    _outEdges[i].value = value;
+  }
+
+  inline int findV(int key) {
+    return binary_search(_vertices.begin(), _vertices.end(), {0, 0, key});
+  }
+
+  inline int findInE(int i, int j) {
+    return binary_search(_inEdges.begin(), _inEdges.end(), {i, j});
+  }
+
+  inline int findOutE(int i, int j) {
+    return binary_search(_outEdges.begin(), _outEdges.end(), {i, j});
+  }
+};
 
 // Number of vertices.
 template <typename V, typename E>

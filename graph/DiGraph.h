@@ -15,6 +15,7 @@ using std::unordered_map;
 using std::binary_search;
 
 
+// TODO: addEdge affects all vertex pointers
 template <typename V, typename E>
 class DiGraph {
   private:
@@ -33,6 +34,7 @@ class DiGraph {
   int size();
   // Graph properties
 
+  bool hasVertex(int key);
   V getVertex(int key);
   void setVertex(int key, V value);
   int outDegree(int key);
@@ -42,6 +44,7 @@ class DiGraph {
   vector<int> inEdges(int key);
   // Vertex properties
 
+  bool hasEdge(int key);
   E getEdge(int key);
   void setEdge(int key, E value);
   int toVertex(int key);
@@ -107,6 +110,13 @@ inline int DiGraph<V, E>::size() {
 }
 
 
+// Does graph have this vertex?
+template <typename V, typename E>
+inline bool DiGraph<V, E>::hasVertex(int key) {
+  return _vertices[key].out >= 0;
+}
+
+
 // Get vertex value.
 template <typename V, typename E>
 inline V DiGraph<V, E>::getVertex(int key) {
@@ -162,6 +172,13 @@ inline vector<int> DiGraph<V, E>::inEdges(int key) {
   for (int i=0, I=_edges.size(); i<I; i++)
     if (_edges[i].to == key) a.push(i);
   return a;
+}
+
+
+// Does graph have this edge?
+template <typename V, typename E>
+inline bool DiGraph<V, E>::hasEdge(int key) {
+  return _edges[key].to >= 0;
 }
 
 

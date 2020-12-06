@@ -16,6 +16,7 @@ using std::binary_search;
 
 
 // TODO: addEdge affects all vertex pointers
+// TODO: implement reverse
 template <typename V, typename E>
 class DiGraph {
   private:
